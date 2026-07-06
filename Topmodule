@@ -1,0 +1,73 @@
+
+`include "sram.sv"
+
+`include "pr_el.sv"
+
+module conv(rst,start,clk);
+//logic [6:0]addr[0:61];
+input logic clk;
+input logic rst,start;
+logic mem_rd_en;
+  logic [14:0]in_val,din,dout;
+  logic [14:0] op_val;
+logic mem_rst;
+
+int i=0;
+logic j;
+typedef enum logic [1:0] {idle, mem_loading, execute, mem_write} state_t;
+logic [1:0]cu_state,nxt_state;
+sram ram1(.clk(clk),.rd_en(mem_rd_en),.din(din),.addr(i),.dout(dout),.state(cu_state));
+
+pr_el pr_el1(.clk(clk),.in(in_val),.out(op_val),.state(cu_state));
+
+always_comb begin
+case(cu_state)
+
+idle:begin
+if(start)begin
+nxt_state=mem_loading;
+mem_rst=1'b0;
+end
+end
+
+mem_loading:begin
+mem_rd_en=1'b1;
+nxt_state=execute;
+end
+
+execute:begin
+in_val=dout;
+nxt_state=mem_write;
+end
+
+mem_write:begin
+din=op_val;
+mem_rd_en=1'b0;
+nxt_state=mem_loading;
+end
+
+default:nxt_state=idle;
+
+endcase
+end
+
+always_ff @(posedge clk)begin
+if(!rst)begin
+cu_state<=nxt_state;
+end
+
+else begin
+cu_state<=idle;
+end
+
+end
+
+
+always_ff @(posedge clk)begin
+
+if(mem_rd_en==1'b1 && cu_state==mem_loading)begin
+i<=i+1;
+end
+end
+
+endmodule
