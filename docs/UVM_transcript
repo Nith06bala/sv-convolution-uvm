@@ -226,3 +226,34 @@
 # UVM_INFO testbench.sv(366) @ 1045: uvm_test_top.env.sboard [SB_SUMMARY] 
 #   mem_read=33  execution=33  mem_write=33  errors=0
 # UVM_INFO /usr/share/questa/questasim/verilog_src/uvm-1.2/src/base/uvm_report_server.svh(847) @ 1045: reporter [UVM/REPORT/SERVER] 
+# --- UVM Report Summary ---
+# 
+# ** Report counts by severity
+# UVM_INFO :  107
+# UVM_WARNING :    0
+# UVM_ERROR :    0
+# UVM_FATAL :    0
+# ** Report counts by id
+# [Questa UVM]     2
+# [RNTST]     1
+# [SB_EXEC]    33
+# [SB_IDLE]     1
+# [SB_MEM_RD]    33
+# [SB_MEM_WR]    33
+# [SB_SUMMARY]     1
+# [TEST]     1
+# [TEST_DONE]     1
+# [UVM/RELNOTES]     1
+# 
+# ** Note: $finish    : /usr/share/questa/questasim/verilog_src/uvm-1.2/src/base/uvm_root.svh(517)
+#    Time: 1045 ns  Iteration: 69  Instance: /conv_tb_top
+# End time: 23:21:05 on Aug 01,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 34
+End time: 23:21:05 on Aug 01,2026, Elapsed time: 0:00:12
+*** Summary *********************************************
+    qrun: Errors:   0, Warnings:   0
+    vlog: Errors:   0, Warnings:   0
+    vopt: Errors:   0, Warnings:   1
+    vsim: Errors:   0, Warnings:  34
+  Totals: Errors:   0, Warnings:  35
+Done
